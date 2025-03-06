@@ -1,25 +1,37 @@
 const express = require('express');
-const app = express();
 const dotenv = require('dotenv');
-dotenv.config();
-const mongoConnect = require('./db/connect');
-mongoConnect();
 const path = require('path');
 const cors = require('cors');
+const mongoConnect = require('./db/connect');
 
-const authRouter = require('../server/Router/authRouter');
-const adminRouter = require('../server/Router/adminRouter')
+dotenv.config();
+mongoConnect();
 
+const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended : true}));
-app.use(express.static('../client'));
+app.use(express.urlencoded({ extended: true }));
+
+// Static files
+app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use(authRouter)
-app.use(adminRouter)
+// Routers
+const authRouter = require('./Router/authRouter');
+const adminRouter = require('./Router/adminRouter');
 
+app.use(authRouter);
+app.use(adminRouter);
 
-app.listen(process.env.PORT, '0.0.0.0', () => {
-    console.log(`server is running at http://0.0.0.0:${process.env.PORT}`);
+// Catch-all for frontend routing (must be after API routes)
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/client/dist/index.html"));
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT,  () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
 });
