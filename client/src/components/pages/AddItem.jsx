@@ -13,7 +13,7 @@ const AddItemForm = () => {
     const body = { name, description, price };
 
     try {
-      let response = await axios.post(`https://dns-assesmenttest-server.onrender.com`, body, {
+      let response = await axios.post(`https://dns-assesmenttest-server.onrender.com/addItem`, body, {
         headers: { "Content-Type": "application/json" },
       });
       setMessage("Item added successfully!");
