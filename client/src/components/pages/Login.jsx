@@ -15,7 +15,7 @@ export default function Login() {
   
     try {
       const response = await axios.post(
-        `https://dns-assesmenttest-server.onrender.com`,
+        `https://dns-assesmenttest-server.onrender.com/login`,
         { email, password },
         {
           headers: {
