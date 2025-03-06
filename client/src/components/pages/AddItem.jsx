@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+const dotenv = require('dotenv');
+dotenv.config();
 
 const AddItemForm = () => {
   const [name, setName] = useState("");
@@ -13,7 +15,7 @@ const AddItemForm = () => {
     const body = { name, description, price };
 
     try {
-      let response = await axios.post("http://localhost:4000/addItem", body, {
+      let response = await axios.post(`${process.env.REACT_APP_API_URL}/addItem`, body, {
         headers: { "Content-Type": "application/json" },
       });
       setMessage("Item added successfully!");

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+const dotenv = require('dotenv');
+dotenv.config();
 
 const AddMenuForm = () => {
   const [categories, setCategories] = useState([]);
@@ -12,7 +14,7 @@ const AddMenuForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/getCategory");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/getCategory`);
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -25,7 +27,7 @@ const AddMenuForm = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/getItems");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/getItems`);
         setItems(response.data);
       } catch (error) {
         console.error("Error fetching items:", error);
@@ -44,7 +46,7 @@ const AddMenuForm = () => {
     };
   
     try {
-      const response = await axios.post("http://localhost:4000/addMenu", body, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/addMenu`, body, {
         headers: { "Content-Type": "application/json" },
       });
       setMessage("Menu added successfully!");

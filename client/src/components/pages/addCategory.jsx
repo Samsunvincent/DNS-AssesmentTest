@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+const dotenv = require('dotenv');
+dotenv.config();
 
 const AddCategoryForm = () => {
   const [category, setCategory] = useState(""); // Initialize as an empty string
@@ -12,7 +14,7 @@ const AddCategoryForm = () => {
     const body = { name : category, description };
 
     try {
-      let response = await axios.post("http://localhost:4000/addCategory", body, {
+      let response = await axios.post(`${process.env.REACT_APP_API_URL}/addCategory`, body, {
         headers: { "Content-Type": "application/json" },
       });
       setMessage("Category added successfully!");
