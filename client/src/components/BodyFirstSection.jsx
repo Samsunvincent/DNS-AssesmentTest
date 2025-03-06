@@ -11,7 +11,7 @@ export default function BodyFirstSection() {
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
-        const response = await axios.get(`https://dns-assesmenttest-server.onrender.com`);
+        const response = await axios.get(`https://dns-assesmenttest-server.onrender.com/getCategory`);
         setCategories(response.data);
 
         // Automatically select the first category if available
@@ -29,7 +29,7 @@ export default function BodyFirstSection() {
   const handleCategoryByMenu = async (id, name) => {
     try {
       setLoading(true); // Start loading
-      const response = await axios.get(`https://dns-assesmenttest-server.onrender.com/${id}`);
+      const response = await axios.get(`https://dns-assesmenttest-server.onrender.com/getMenuByCategory/${id}`);
       console.log(response.data); // Debugging log
 
       if (response.data.length > 0) {
