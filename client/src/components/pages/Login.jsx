@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const dotenv = require('dotenv');
-dotenv.config();
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,7 +15,7 @@ export default function Login() {
   
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/login`,
+        `http://localhost:4000/login`,
         { email, password },
         {
           headers: {

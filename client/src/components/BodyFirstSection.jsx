@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-const dotenv = require('dotenv');
-dotenv.config();
+
 
 export default function BodyFirstSection() {
   const [categories, setCategories] = useState([]);
@@ -12,7 +11,7 @@ export default function BodyFirstSection() {
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/getCategory`);
+        const response = await axios.get(`http://localhost:4000/getCategory`);
         setCategories(response.data);
 
         // Automatically select the first category if available
@@ -30,7 +29,7 @@ export default function BodyFirstSection() {
   const handleCategoryByMenu = async (id, name) => {
     try {
       setLoading(true); // Start loading
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/getMenuByCategory/${id}`);
+      const response = await axios.get(`http://localhost:4000/getMenuByCategory/${id}`);
       console.log(response.data); // Debugging log
 
       if (response.data.length > 0) {
