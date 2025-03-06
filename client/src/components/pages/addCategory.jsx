@@ -13,7 +13,7 @@ const AddCategoryForm = () => {
     const body = { name : category, description };
 
     try {
-      let response = await axios.post(`http://localhost:4000/addCategory`, body, {
+      let response = await axios.post(`https://dns-assesmenttest-server.onrender.com`, body, {
         headers: { "Content-Type": "application/json" },
       });
       setMessage("Category added successfully!");
