@@ -13,7 +13,7 @@ const AddMenuForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/getCategory`);
+        const response = await axios.get(`https://dns-assesmenttest-server.onrender.com/getCategory`);
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -26,7 +26,7 @@ const AddMenuForm = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/getItems`);
+        const response = await axios.get(`https://dns-assesmenttest-server.onrender.com/getItems`);
         setItems(response.data);
       } catch (error) {
         console.error("Error fetching items:", error);
@@ -45,7 +45,7 @@ const AddMenuForm = () => {
     };
   
     try {
-      const response = await axios.post(`http://localhost:4000/addMenu`, body, {
+      const response = await axios.post(`https://dns-assesmenttest-server.onrender.com/addMenu`, body, {
         headers: { "Content-Type": "application/json" },
       });
       setMessage("Menu added successfully!");
